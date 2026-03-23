@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vestia — Career Mentorship for Women Who Are Building Something</title>
+<meta name="description" content="Vestia is a mentorship platform helping early-career women navigate from first job to VP. Structured guidance, peer community, and a path that grows with you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1B365D;
+    --teal: #2A7F8E;
+    --coral: #C75C3A;
+    --gold: #C49A2A;
+    --cream: #FAF7F2;
+    --warm-white: #FFFDFB;
+    --text-primary: #1B2530;
+    --text-secondary: #5A6674;
+    --text-tertiary: #8D96A0;
+    --border-light: rgba(27, 54, 93, 0.08);
+    --stage-teal: #E8F0F2;
+    --stage-gold: #F0EDE4;
+    --stage-purple: #EDE8F0;
+    --stage-coral: #F0E8E8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text-primary);
+    background: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ─── TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  .serif { font-family: 'Instrument Serif', Georgia, serif; }
+  .sans { font-family: 'DM Sans', sans-serif; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(250, 247, 242, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-light);
+    transition: all 0.3s ease;
+  }
+
+  .nav-logo {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+
+  .nav-cta {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--warm-white);
+    background: var(--navy);
+    border: none;
+    padding: 0.6rem 1.4rem;
+    border-radius: 100px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+
+  .nav-cta:hover {
+    background: var(--teal);
+    transform: translateY(-1px);
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    top: -20%;
+    right: -15%;
+    width: 70vw;
+    height: 70vw;
+    max-width: 800px;
+    max-height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 30% 40%, var(--stage-teal) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 60%, var(--stage-gold) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, var(--stage-coral) 0%, transparent 70%);
+    opacity: 0.5;
+    filter: blur(60px);
+    animation: breathe 8s ease-in-out infinite;
+  }
+
+  @keyframes breathe {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.5; }
+    50% { transform: scale(1.05) rotate(3deg); opacity: 0.6; }
+  }
+
+  .hero-content {
+    max-width: 720px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--teal);
+  }
+
+  .hero h1 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--navy);
+    margin-bottom: 1.75rem;
+    letter-spacing: -0.02em;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--coral);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--warm-white);
+    background: var(--coral);
+    border: none;
+    padding: 0.9rem 2rem;
+    border-radius: 100px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 12px rgba(199, 92, 58, 0.25);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(199, 92, 58, 0.35);
+  }
+
+  .btn-primary svg {
+    transition: transform 0.2s ease;
+  }
+
+  .btn-primary:hover svg {
+    transform: translateX(3px);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--navy);
+    background: none;
+    border: 1.5px solid var(--border-light);
+    padding: 0.85rem 1.6rem;
+    border-radius: 100px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.25s ease;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--navy);
+    background: rgba(27, 54, 93, 0.04);
+  }
+
+  /* ─── SECTION SHARED ─── */
+  section {
+    padding: 6rem 2rem;
+  }
+
+  .section-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--navy);
+    margin-bottom: 1.25rem;
+    letter-spacing: -0.01em;
+  }
+
+  .section-subtitle {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin-bottom: 3rem;
+  }
+
+  /* ─── PROBLEM ─── */
+  .problem {
+    background: var(--navy);
+    color: #fff;
+    position: relative;
+  }
+
+  .problem .section-label { color: var(--gold); }
+  .problem .section-title { color: #fff; }
+  .problem .section-subtitle { color: rgba(255,255,255,0.7); }
+
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .stat-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .stat-card:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-2px);
+  }
+
+  .stat-number {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 3rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.65);
+  }
+
+  .stat-source {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.35);
+    margin-top: 0.6rem;
+    font-style: italic;
+  }
+
+  /* ─── HOW IT WORKS / JOURNEY ─── */
+  .journey {
+    background: var(--warm-white);
+  }
+
+  .stage-track {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 1rem;
+    position: relative;
+  }
+
+  .stage-track::before {
+    content: '';
+    position: absolute;
+    top: 2.5rem;
+    left: 4rem;
+    right: 4rem;
+    height: 2px;
+    background: linear-gradient(to right, #085041, #854F0B, #3C3489, #712B13);
+    opacity: 0.2;
+  }
+
+  .stage-item {
+    text-align: center;
+    padding: 0 0.75rem;
+    position: relative;
+  }
+
+  .stage-dot {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin: 0 auto 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.2rem;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s ease;
+  }
+
+  .stage-item:hover .stage-dot {
+    transform: scale(1.1);
+  }
+
+  .stage-dot.s1 { background: var(--stage-teal); color: #085041; }
+  .stage-dot.s2 { background: var(--stage-gold); color: #854F0B; }
+  .stage-dot.s3 { background: var(--stage-purple); color: #3C3489; }
+  .stage-dot.s4 { background: var(--stage-coral); color: #712B13; }
+
+  .stage-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
+  }
+
+  .stage-desc {
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  /* ─── WHAT YOU GET ─── */
+  .features {
+    background: var(--cream);
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .feature-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--teal);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 32px rgba(27, 54, 93, 0.08);
+  }
+
+  .feature-card:hover::before {
+    opacity: 1;
+  }
+
+  .feature-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+    font-size: 1.2rem;
+  }
+
+  .feature-icon.fi-mentor { background: var(--stage-teal); color: #085041; }
+  .feature-icon.fi-cohort { background: var(--stage-gold); color: #854F0B; }
+  .feature-icon.fi-content { background: var(--stage-purple); color: #3C3489; }
+  .feature-icon.fi-network { background: var(--stage-coral); color: #712B13; }
+  .feature-icon.fi-tracker { background: #E6F1FB; color: #0C447C; }
+  .feature-icon.fi-owned { background: #FAEEDA; color: #854F0B; }
+
+  .feature-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+  }
+
+  .feature-desc {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  /* ─── ORIGIN STORY ─── */
+  .story {
+    background: var(--warm-white);
+  }
+
+  .story-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .story-text p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+  }
+
+  .story-text p:first-of-type::first-letter {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 3.2rem;
+    float: left;
+    line-height: 1;
+    padding-right: 0.5rem;
+    color: var(--navy);
+  }
+
+  .story-aside {
+    position: relative;
+  }
+
+  .story-quote {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.5rem;
+    line-height: 1.45;
+    color: var(--navy);
+    padding: 2.5rem;
+    background: var(--cream);
+    border-radius: 16px;
+    border-left: 3px solid var(--coral);
+    position: relative;
+  }
+
+  .story-quote cite {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    margin-top: 1rem;
+    letter-spacing: 0.02em;
+  }
+
+  /* ─── WAITLIST / REGISTER ─── */
+  .waitlist {
+    background: var(--navy);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .waitlist-glow {
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 60vw;
+    height: 60vw;
+    max-width: 600px;
+    max-height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, rgba(199, 92, 58, 0.15) 0%, transparent 60%);
+    filter: blur(40px);
+  }
+
+  .waitlist-inner {
+    max-width: 560px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .waitlist .section-label { color: var(--gold); }
+  .waitlist .section-title { color: #fff; margin-bottom: 0.75rem; }
+
+  .waitlist-sub {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 2.5rem;
+  }
+
+  .form-container {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 2.25rem 2rem;
+    text-align: left;
+  }
+
+  .form-row {
+    margin-bottom: 1.25rem;
+  }
+
+  .form-row:last-of-type {
+    margin-bottom: 1.5rem;
+  }
+
+  .form-label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+  }
+
+  .form-input {
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: #fff;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 0.85rem 1rem;
+    outline: none;
+    transition: all 0.25s ease;
+  }
+
+  .form-input::placeholder {
+    color: rgba(255,255,255,0.3);
+  }
+
+  .form-input:focus {
+    border-color: var(--coral);
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 0 0 3px rgba(199, 92, 58, 0.15);
+  }
+
+  select.form-input {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='rgba(255,255,255,0.5)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+    cursor: pointer;
+  }
+
+  select.form-input option {
+    background: var(--navy);
+    color: #fff;
+  }
+
+  .form-submit {
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--warm-white);
+    background: var(--coral);
+    border: none;
+    padding: 0.95rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 12px rgba(199, 92, 58, 0.3);
+  }
+
+  .form-submit:hover {
+    background: #d4693f;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(199, 92, 58, 0.4);
+  }
+
+  .form-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .form-note {
+    text-align: center;
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.35);
+    margin-top: 1rem;
+    line-height: 1.5;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 2rem 0;
+  }
+
+  .form-success.show {
+    display: block;
+  }
+
+  .form-success h3 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.6rem;
+    color: #fff;
+    margin-bottom: 0.75rem;
+  }
+
+  .form-success p {
+    color: rgba(255,255,255,0.65);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .success-check {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(29, 158, 117, 0.2);
+    border: 2px solid rgba(29, 158, 117, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.25rem;
+    color: #1D9E75;
+    font-size: 1.4rem;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--navy);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-tagline {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.25);
+  }
+
+  /* ─── ANIMATIONS ─── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* stagger children */
+  .stagger > * {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .stagger.visible > *:nth-child(1) { transition-delay: 0s; opacity: 1; transform: translateY(0); }
+  .stagger.visible > *:nth-child(2) { transition-delay: 0.08s; opacity: 1; transform: translateY(0); }
+  .stagger.visible > *:nth-child(3) { transition-delay: 0.16s; opacity: 1; transform: translateY(0); }
+  .stagger.visible > *:nth-child(4) { transition-delay: 0.24s; opacity: 1; transform: translateY(0); }
+  .stagger.visible > *:nth-child(5) { transition-delay: 0.32s; opacity: 1; transform: translateY(0); }
+  .stagger.visible > *:nth-child(6) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.25rem; }
+    section { padding: 4rem 1.25rem; }
+    .hero { padding: 7rem 1.25rem 3rem; min-height: auto; }
+    .hero h1 { font-size: 2.4rem; }
+    .hero-sub { font-size: 1rem; }
+    .stat-grid { grid-template-columns: 1fr 1fr; }
+    .stage-track { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .stage-track::before { display: none; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .story-content { grid-template-columns: 1fr; gap: 2rem; }
+    .form-container { padding: 1.75rem 1.5rem; }
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .btn-primary, .btn-ghost { justify-content: center; }
+  }
+
+  @media (max-width: 480px) {
+    .stat-grid { grid-template-columns: 1fr; }
+    .stat-number { font-size: 2.5rem; }
+    .hero h1 { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Vestia</div>
+  <a href="#waitlist" class="nav-cta">Join the Waitlist</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content fade-up">
+    <div class="hero-eyebrow">Career mentorship for women</div>
+    <h1>The career guidance you needed <em>yesterday,</em> built to last a decade.</h1>
+    <p class="hero-sub">Vestia is a mentorship platform helping early-career women navigate from first job to VP — with structured guidance, peer community, and a path that grows with you.</p>
+    <div class="hero-actions">
+      <a href="#waitlist" class="btn-primary">
+        Get Early Access
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+      <a href="#problem" class="btn-ghost">Learn more</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem" id="problem">
+  <div class="section-inner">
+    <div class="section-label">The Broken Rung</div>
+    <h2 class="section-title">The career pipeline for women breaks<br>at the very first step.</h2>
+    <p class="section-subtitle">It's not a glass ceiling — it's a broken rung. The gap starts at the first promotion and compounds for decades.</p>
+    <div class="stat-grid stagger">
+      <div class="stat-card">
+        <div class="stat-number">81</div>
+        <div class="stat-label">women promoted to manager for every 100 men — the first rung is where the gap begins</div>
+        <div class="stat-source">McKinsey & LeanIn.Org, 2024</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">65</div>
+        <div class="stat-label">Latina women promoted for every 100 men. For Black women, just 54.</div>
+        <div class="stat-source">Women in the Workplace, 2024</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">59%</div>
+        <div class="stat-label">of bachelor's degrees earned by women — yet they hold only 48% of entry-level corporate roles</div>
+        <div class="stat-source">National Center for Education Statistics</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">10yr</div>
+        <div class="stat-label">The compounding effect of one missed early promotion cascades across an entire career</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section class="journey" id="journey">
+  <div class="section-inner">
+    <div class="section-label">The Journey Map</div>
+    <h2 class="section-title">A path designed for where you are — and where you're headed.</h2>
+    <p class="section-subtitle">Vestia grows with you through four career stages, each with its own focus, tools, and community.</p>
+    <div class="stage-track stagger">
+      <div class="stage-item">
+        <div class="stage-dot s1">1</div>
+        <div class="stage-name">Exploring</div>
+        <div class="stage-desc">Figuring out what you want and where to start</div>
+      </div>
+      <div class="stage-item">
+        <div class="stage-dot s2">2</div>
+        <div class="stage-name">Landing</div>
+        <div class="stage-desc">Actively searching, interviewing, and starting your first role</div>
+      </div>
+      <div class="stage-item">
+        <div class="stage-dot s3">3</div>
+        <div class="stage-name">Building</div>
+        <div class="stage-desc">Growing in your role and developing mastery</div>
+      </div>
+      <div class="stage-item">
+        <div class="stage-dot s4">4</div>
+        <div class="stage-name">Advancing</div>
+        <div class="stage-desc">Pushing for management and leadership positions</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-inner">
+    <div class="section-label">What You Get</div>
+    <h2 class="section-title">Everything the group chat can't give you.</h2>
+    <p class="section-subtitle">Vestia replaces scattered advice with a structured system built around your actual career stage.</p>
+    <div class="feature-grid stagger">
+      <div class="feature-card">
+        <div class="feature-icon fi-mentor">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="feature-title">1:1 Mentorship</div>
+        <div class="feature-desc">Matched with an experienced mentor who knows your stage, your industry, and what comes next. Not a chatbot — a real relationship.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-cohort">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="feature-title">Peer Cohorts</div>
+        <div class="feature-desc">A small group of 15–25 women at your career stage. Weekly check-ins, shared wins, and the accountability that makes you show up.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-content">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <div class="feature-title">Stage-Based Playbooks</div>
+        <div class="feature-desc">Negotiation scripts, interview prep, performance review frameworks — the actual tools your mentor would give you, available on demand.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-network">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="feature-title">Personal Board of Directors</div>
+        <div class="feature-desc">Build your career board intentionally: mentor, sponsor, connector, challenger, coach. We teach the framework and help you fill the seats.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-tracker">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <div class="feature-title">Career Tracking</div>
+        <div class="feature-desc">Goals, milestones, job applications, and progress — all in one place. See where you are, what to focus on, and what's next.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon fi-owned">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <div class="feature-title">Member-Owned</div>
+        <div class="feature-desc">Vestia is built to be owned by its members. You're not just a user — you're a stakeholder in the community you help build.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY VESTIA -->
+<section class="story" id="story">
+  <div class="section-inner">
+    <div class="story-content">
+      <div class="story-text fade-up">
+        <div class="section-label">Why Vestia Exists</div>
+        <h2 class="section-title">There's a gap between inspiration and actual guidance.</h2>
+        <p>Women in Business clubs, campus networking events, "lean in" circles — they all do something valuable. They build community and confidence. But when you're sitting in your car after a job interview wondering if you should have asked for more money, or staring at a performance review that feels unfair, or trying to figure out whether a lateral move is a trap or an opportunity — community alone doesn't answer those questions.</p>
+        <p>The advice that actually changes career trajectories is specific, tactical, and timed to the moment you need it. It's knowing what to negotiate before the offer comes, not after. It's understanding how to build a relationship with a sponsor — and knowing the difference between a sponsor and a mentor in the first place. It's the kind of knowledge that gets passed down informally in certain networks and families, and simply doesn't reach everyone else.</p>
+        <p>Existing programs tend to offer one of two things: short-term events and workshops, or open-ended networking that you have to figure out on your own. Neither is designed for the 10–20 year arc of an actual career. Neither adapts as your needs change from "how do I get hired" to "how do I get promoted to VP."</p>
+        <p>Vestia is built to fill that gap — structured mentorship, stage-specific tools, and a peer community that grows with you over years, not semesters. Not a one-time event. Not a networking group. A system designed for the long game.</p>
+      </div>
+      <div class="story-aside fade-up">
+        <div class="story-quote">
+          The advice that changes careers isn't complicated. It's knowing what to ask, when to ask it, and having someone in your corner when it matters.
+          <cite>— The premise behind Vestia</cite>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAITLIST -->
+<section class="waitlist" id="waitlist">
+  <div class="waitlist-glow"></div>
+  <div class="waitlist-inner">
+    <div class="section-label">Early Access</div>
+    <h2 class="section-title">Vestia is launching soon.</h2>
+    <p class="waitlist-sub">We're opening the first cohort to a small group of women ready to build their careers with intention. Join the waitlist and be the first to know.</p>
+
+    <div class="form-container" id="formContainer">
+      <form id="waitlistForm" name="vestia-waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="vestia-waitlist">
+        <p class="visually-hidden"><label>Don't fill this out: <input name="bot-field"></label></p>
+        <div class="form-row">
+          <label class="form-label" for="firstName">First Name</label>
+          <input class="form-input" type="text" id="firstName" name="firstName" placeholder="Caroline" required>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input" type="email" id="email" name="email" placeholder="you@email.com" required>
+        </div>
+        <div class="form-row">
+          <label class="form-label" for="stage">Where are you in your career?</label>
+          <select class="form-input" id="stage" name="stage" required>
+            <option value="" disabled selected>Select your stage</option>
+            <option value="exploring">I'm still figuring out what I want to do</option>
+            <option value="landing">I'm actively looking for a job or just started one</option>
+            <option value="building">I'm in my role and want to grow</option>
+            <option value="advancing">I'm ready to move into management</option>
+          </select>
+        </div>
+        <button class="form-submit" type="submit" id="submitBtn">Join the Waitlist</button>
+        <p class="form-note">No spam. We'll email you once when Vestia is ready — and that's it until launch.</p>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <div class="success-check">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3>You're on the list.</h3>
+        <p>We'll be in touch when the first cohort opens. In the meantime — the fire is being tended.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Vestia</div>
+  <div class="footer-tagline">Tend the fire.</div>
+</footer>
+
+<script>
+  // Intersection Observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-up, .stagger').forEach(el => observer.observe(el));
+
+  // Trigger hero immediately
+  setTimeout(() => {
+    document.querySelector('.hero .fade-up')?.classList.add('visible');
+  }, 200);
+
+  // Form handling — Netlify Forms AJAX submission
+  const form = document.getElementById('waitlistForm');
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Joining…';
+
+    try {
+      const formData = new FormData(form);
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      });
+
+      if (response.ok) {
+        form.style.display = 'none';
+        document.querySelector('.form-note').style.display = 'none';
+        document.getElementById('formSuccess').classList.add('show');
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = 'Join the Waitlist';
+      alert('Something went wrong — please try again.');
+    }
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
